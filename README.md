@@ -8,11 +8,11 @@
 
 This project is a **modular**, **responsive**, and **accessible** e‑commerce application featuring:
 
-* **Authentication**: login, registration & logout flows
-* **Product catalog**: listing and individual product pages
-* **Stripe checkout**: integrated PaymentElement for secure one‑time purchases
-* **Dark theme**: elegant palette inspired by modern UI trends
-* **User feedback**: smooth loading states, error/success messages, and micro‑interactions
+- **Authentication**: login, registration & logout flows
+- **Product catalog**: listing and individual product pages
+- **Stripe checkout**: integrated PaymentElement for secure one‑time purchases
+- **Dark theme**: elegant palette inspired by modern UI trends
+- **User feedback**: smooth loading states, error/success messages, and micro‑interactions
 
 Designed to showcase serious craftsmanship and a high‑quality user experience.
 
@@ -20,13 +20,13 @@ Designed to showcase serious craftsmanship and a high‑quality user experience.
 
 ## ✨ Key Features
 
-* **Authentication Pages**: `/login`, `/register`, `/logout`
-* **Product Browsing**: `/products`, `/products/[id]`
-* **Checkout Flow**: `/checkout` (payment form), `/payment-success`, `/error`
-* **Payment Integration**: Stripe PaymentElement, secure clientSecret fetch
-* **Responsive Design**: mobile‑first, fluid grid layouts
-* **Component Library**: reusable UI components with clear API
-* **Dark Mode**: consistent dark palette with accent colors
+- **Authentication Pages**: `/login`, `/register`, `/logout`
+- **Product Browsing**: `/products`, `/products/[id]`
+- **Checkout Flow**: `/checkout` (payment form), `/payment-success`, `/error`
+- **Payment Integration**: Stripe PaymentElement, secure clientSecret fetch
+- **Responsive Design**: mobile‑first, fluid grid layouts
+- **Component Library**: reusable UI components with clear API
+- **Dark Mode**: consistent dark palette with accent colors
 
 ---
 
@@ -38,21 +38,24 @@ Designed to showcase serious craftsmanship and a high‑quality user experience.
    git clone https://github.com/YourUsername/your-ecommerce-app.git
    cd your-ecommerce-app
    ```
+
 2. **Install dependencies**
 
    ```bash
    pnpm install
-   
-   ```
-3. **Configure environment**
 
-    * Copy `.env.example` to `.env`
-    * Set `NUXT_PUBLIC_STRIPE_PK`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, etc.
+   ```
+
+3. **Configure environment**
+   - Copy `.env.example` to `.env`
+   - Set `NUXT_PUBLIC_STRIPE_PK`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, etc.
+
 4. **Run the development server**
 
    ```bash
    pnpm dev
    ```
+
 5. **Build & Preview**
 
    ```bash
@@ -115,12 +118,12 @@ Designed to showcase serious craftsmanship and a high‑quality user experience.
 
 ## 📦 Tech Stack
 
-* **Framework**: [Nuxt 3](https://nuxt.com)
-* **Styling**: [Tailwind CSS](https://tailwindcss.com) + Headless UI
-* **Payment**: [Stripe PaymentElement](https://stripe.com/docs/payments/payment-element)
-* **API**: Nuxt Nitro server routes, Zod for validation
-* **State Management**: Nuxt composables (e.g. `useCart`)
-* **Icons**: Heroicons, Lucide
+- **Framework**: [Nuxt 3](https://nuxt.com)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) + Headless UI
+- **Payment**: [Stripe PaymentElement](https://stripe.com/docs/payments/payment-element)
+- **API**: Nuxt Nitro server routes, Zod for validation
+- **State Management**: Nuxt composables (e.g. `useCart`)
+- **Icons**: Heroicons, Lucide
 
 ---
 
@@ -128,9 +131,9 @@ Designed to showcase serious craftsmanship and a high‑quality user experience.
 
 This project provides only the **UI**. You should implement the following backend logic yourself:
 
-* **Authentication** (login/register/logout)
-* **Product Fetching** and **Cart Management**
-* **Server‑side API** for Stripe (PaymentIntent, Webhooks)
+- **Authentication** (login/register/logout)
+- **Product Fetching** and **Cart Management**
+- **Server‑side API** for Stripe (PaymentIntent, Webhooks)
 
 Once these are in place, the UI will seamlessly integrate with your business logic.
 

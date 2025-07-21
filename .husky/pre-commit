@@ -1,0 +1,13 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running lint-staged before commit..."
+
+pnpm exec lint-staged
+
+if [ $? -ne 0 ]; then
+  echo "❌ Lint failed. Commit aborted."
+  exit 1
+fi
+
+echo "✅ Lint passed. Proceeding with commit."
