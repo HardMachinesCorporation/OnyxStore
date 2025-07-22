@@ -206,4 +206,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## 📧 Contact
 
-Built with 💜 by Your Name. For questions or feedback, reach out at [thejordach@gmail.com](mailto:thejordach@gmail.com).
+Built with 💜 by Jordach MAKAYA. For questions or feedback, reach out at [thejordach@gmail.com](mailto:thejordach@gmail.com).
