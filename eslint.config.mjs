@@ -21,8 +21,8 @@ export default withNuxt(antfu({
     'ts/consistent-type-definitions': ['error', 'type'],
     'no-console': ['warn'],
     'antfu/no-top-level-await': ['off'],
-    'node/prefer-global/process:': ['off'],
-    'node/no-process-env': ['error'],
+    'node/prefer-global/process': ['off'],
+    'node/no-process-env': ['warn'],
     'perfectionist/sort-imports': ['error', {
       order: 'asc',
       type: 'natural',
@@ -34,11 +34,11 @@ export default withNuxt(antfu({
     }],
 
     'unicorn/filename-case': ['error', {
-      cases:{
-        'kebabCase':true,
-        'pascalCase':true,
-        'camelCase':true,
-      } ,
+      cases: {
+        kebabCase: true,
+        pascalCase: true,
+        camelCase: true,
+      },
       ignore: ['README.md'],
     }],
   },

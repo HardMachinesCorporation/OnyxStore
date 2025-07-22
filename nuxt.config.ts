@@ -46,4 +46,10 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig: {
+    public: {
+
+      freeShippingThreshold: process.env.NUXT_FREE_SHIPPING_THRESHOLD,
+    },
+  },
 })

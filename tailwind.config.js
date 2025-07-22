@@ -57,7 +57,7 @@ module.exports = {
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.3s ease-out',
+        'slide-up': 'slide-up 1.2s cubic-bezier(0.22, 1, 0.36, 1)',
         'pulse-slow': 'pulse 3s infinite',
       },
       keyframes: {
