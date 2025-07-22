@@ -20,46 +20,46 @@ docs/
 
 **Brève description de chaque fichier** :
 
-* **01-introduction.md**
+- **01-introduction.md**
   Contexte du projet, tagline « A professional, dark‑themed… ».
 
-* **02-sonarcloud-analysis.md**
+- **02-sonarcloud-analysis.md**
   Votre section SonarCloud (badges + explications).
 
-* **03-overview\.md**
+- **03-overview\.md**
   Vue d’ensemble des fonctionnalités (authentication, catalog, checkout…).
 
-* **04-key-features.md**
+- **04-key-features.md**
   Liste détaillée des routes/pages et points forts (Dark mode, responsive…).
 
-* **05-getting-started.md**
+- **05-getting-started.md**
   Guide clone → install → env → run/dev/build.
 
-* **06-folder-structure.md**
+- **06-folder-structure.md**
   Arborescence du projet avec brève description de chaque dossier/fichier.
 
-* **07-pages-responsibilities.md**
+- **07-pages-responsibilities.md**
   Tableau “Page → Responsibility” (login, products, checkout…).
 
-* **08-tech-stack.md**
+- **08-tech-stack.md**
   Stack utilisée (Nuxt 3, Tailwind CSS, Stripe, Zod…).
 
-* **09-usage.md**
+- **09-usage.md**
   Instructions “this project provides only the UI, implement your backend…”.
 
-* **10-commit-guidelines.md**
+- **10-commit-guidelines.md**
   Husky / commitizen / cz-git / eslint-plugin-\* et `pnpm commit`.
 
-* **11-eslint-configuration.md**
+- **11-eslint-configuration.md**
   Explication de la config flat `eslint.config.js` et Antfu preset.
 
-* **12-contributing.md**
+- **12-contributing.md**
   Fork → feature branch → PR process.
 
-* **13-license.md**
+- **13-license.md**
   MIT License (copier le contenu de `LICENSE`).
 
-* **14-contact.md**
+- **14-contact.md**
   Vos coordonnées (Your Name, email, etc.).
 
 ---

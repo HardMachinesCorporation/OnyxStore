@@ -77,7 +77,7 @@ onMounted(() => {
             to="/about"
             class="navigation-link"
           >
-            About the developer
+            About me
           </NuxtLink>
         </nav>
 

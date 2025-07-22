@@ -14,7 +14,7 @@ export default withNuxt(antfu({
     semi: false,
     quotes: 'single',
   },
-  ignore: ['.pnpm-store/', 'libs/migrations/*', 'libs/migrations/meta/*.json', 'docs/**/*.md', '**/*.md'],
+  ignore: ['.pnpm-store/', 'libs/migrations/*', 'libs/migrations/meta/*.json'],
 
 }, {
   rules: {
@@ -34,11 +34,11 @@ export default withNuxt(antfu({
     }],
 
     'unicorn/filename-case': ['error', {
-      cases: {
-        kebabCase: true,
-        camelCase: true,
-        pascalCase: true,
-      },
+      cases:{
+        'kebabCase':true,
+        'pascalCase':true,
+        'camelCase':true,
+      } ,
       ignore: ['README.md'],
     }],
   },
