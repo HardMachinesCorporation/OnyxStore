@@ -6,6 +6,8 @@ import {
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 
+import Footer from '~/components/app/footer.vue'
+
 type INotification = {
   id: number
   message: string
@@ -42,6 +44,8 @@ provide('addNotification', addNotification)
     <main class="relative">
       <slot />
     </main>
+
+    <Footer />
 
     <!-- Global Loading Overlay -->
     <div v-if="pending" class="fixed inset-0 bg-dark-950/80 backdrop-blur-sm z-50 flex items-center justify-center">
