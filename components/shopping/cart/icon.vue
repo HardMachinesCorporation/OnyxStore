@@ -3,8 +3,6 @@
 
 <template>
   <div>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+    <h2>CartIcons</h2>
   </div>
 </template>

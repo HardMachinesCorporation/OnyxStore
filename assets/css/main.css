@@ -41,6 +41,10 @@
   .loading-spinner {
     @apply animate-spin h-5 w-5 border-2 border-current border-t-transparent rounded-full;
   }
+
+  .navigation-link {
+    @apply text-gray-300 hover:text-primary-400 px-3 py-2 text-sm font-medium transition-colors duration-200;
+  }
 }
 
 .fade-enter-active,

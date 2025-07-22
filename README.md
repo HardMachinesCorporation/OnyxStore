@@ -139,6 +139,31 @@ Once these are in place, the UI will seamlessly integrate with your business log
 
 ---
 
+## 🛠️ Commit Guidelines
+
+This project comes pre-configured with the following tools to enforce commit conventions and code quality:
+
+- **husky**
+- **commitizen** (`^4.3.1`)
+- **cz-git** (`^1.12.0`)
+- **eslint-plugin-format** (`^1.0.1`)
+- **eslint-plugin-perfectionist** (see `package.json` for exact version)
+
+To create a properly formatted commit (with Husky running your lint/format hooks and Commitizen guiding your message), simply run:
+
+```bash
+pnpm commit
+```
+
+---
+
+## 🛡️ ESLint Configuration
+
+This project uses a **flat ESLint config** powered by Antfu’s preset (`@antfu/eslint-config`).
+All rules are declared in your `eslint.config.js` (flat-config) format, combined with Nuxt via the `withNuxt()` helper.
+
+---
+
 ## 🤝 Contributing
 
 1. Fork the repository
