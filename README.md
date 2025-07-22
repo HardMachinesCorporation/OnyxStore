@@ -4,6 +4,23 @@
 
 ---
 
+## 🐋 SonarCloud Code Analysis
+
+| **Code & Duplication** |
+|:-----------------------|
+| [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=HardMachinesCorporation_OnyxStore&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=HardMachinesCorporation_OnyxStore) [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=HardMachinesCorporation_OnyxStore&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=HardMachinesCorporation_OnyxStore) |
+
+| **Quality & Security** |
+|:----------------------|
+| [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HardMachinesCorporation_OnyxStore&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=HardMachinesCorporation_OnyxStore) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HardMachinesCorporation_OnyxStore&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=HardMachinesCorporation_OnyxStore) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=HardMachinesCorporation_OnyxStore&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=HardMachinesCorporation_OnyxStore) |
+
+| **Issues & Maintainability** |
+|:----------------------------|
+| [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=HardMachinesCorporation_OnyxStore&metric=bugs)](https://sonarcloud.io/summary/new_code?id=HardMachinesCorporation_OnyxStore) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=HardMachinesCorporation_OnyxStore&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=HardMachinesCorporation_OnyxStore) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HardMachinesCorporation_OnyxStore&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=HardMachinesCorporation_OnyxStore) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=HardMachinesCorporation_OnyxStore&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=HardMachinesCorporation_OnyxStore) |
+
+
+---
+
 ## 🌐 Overview
 
 This project is a **modular**, **responsive**, and **accessible** e‑commerce application featuring:
