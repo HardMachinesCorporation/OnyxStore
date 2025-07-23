@@ -171,3 +171,12 @@ export const ERROR_MESSAGES: Record<string, string> = {
   weak_password:
     'Password does not meet strength requirements. Please choose a stronger password.',
 }
+
+export const LOGOUT_ERROR: Record<number, string> = {
+  400: 'Please confirm your account first.',
+  403: 'Session expired or access denied.',
+  422: 'Session error. Please log in again.',
+  429: 'Too many requests. Try again soon.',
+  500: 'Server error. Please try again later.',
+  501: 'Feature not available yet.',
+}

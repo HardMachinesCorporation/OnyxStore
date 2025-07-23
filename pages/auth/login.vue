@@ -57,7 +57,6 @@ async function handleLogin() {
     // Mock successful login
 
     // Redirect to home or dashboard
-    navigateTo('/')
   }
   catch (error) {
     // TODO debug only

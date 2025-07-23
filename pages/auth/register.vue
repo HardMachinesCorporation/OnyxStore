@@ -90,12 +90,14 @@ const environment = useAppEn()
 const isProd = environment === 'prod'
 const urlRedirection = isProd ? 'https://onyx-store.vercel.app/auth/confirm-email' : 'http://localhost:3000/auth/confirm-email'
 
-const { handleAuthError } = useAuthErrorHandler()
+const { handleRegistrationError } = useAuthErrorHandler()
+
 async function handleRegister() {
   if (!validateForm())
     return
 
   loading.value = true
+
   try {
     const { error } = await supabase.auth.signUp({
       email: form.email,
@@ -115,7 +117,7 @@ async function handleRegister() {
      * handleAuthError require an instance of AuthError
      */
     if (error instanceof AuthError) {
-      handleAuthError(error)
+      handleRegistrationError(error)
       loading.value = false
       return
     }
