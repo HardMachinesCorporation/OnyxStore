@@ -15,7 +15,7 @@ const userMenuRef = ref<HTMLElement | null>(null)
 function handleLogout() {
   showUserMenu.value = false
   // TODO Logout logic will be implemented here
-  navigateTo('/logout')
+  navigateTo('/auth/logout')
 }
 
 /*
@@ -115,11 +115,18 @@ onMounted(() => {
                 class="absolute right-0 mt-2 w-48 bg-dark-900 border-dark-700 rounded-lg shadow-lg py-1"
               >
                 <NuxtLink
-                  to="/login"
+                  to="/auth/login"
                   class="block px-4 py-2 text-sm text-gray-300 hover:bg-dark-800 hover:text-primary-400 transition-colors duration-200"
                   @click="showUserMenu = false"
                 >
                   Login
+                </NuxtLink>
+                <NuxtLink
+                  to="/auth/register"
+                  class="block px-4 py-2 text-sm text-gray-300 hover:bg-dark-800 hover:text-primary-400 transition-colors duration-200"
+                  @click="showUserMenu = false"
+                >
+                  Register
                 </NuxtLink>
                 <!-- separator line -->
                 <div class="border-t border-dark-700 my-1" />

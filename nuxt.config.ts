@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     configPath: './tailwind.config.js',
     cssPath: '~/assets/css/tailwind.css',
 
-  }]],
+  }], '@nuxtjs/supabase'],
   eslint: {
     config: {
       standalone: false,
@@ -47,9 +47,15 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
+    databaseURL: process.env.NUXT_DATABASE_URL,
     public: {
-
       freeShippingThreshold: process.env.NUXT_FREE_SHIPPING_THRESHOLD,
+      appEnv: process.env.NUXT_PUBLIC_APP_ENV || 'dev',
     },
+  },
+  supabase: {
+    url: process.env.NUXT_SUPABASE_URL,
+    key: process.env.NUXT_SUPABASE_KEY,
+    redirect: false,
   },
 })

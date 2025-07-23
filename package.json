@@ -4,7 +4,9 @@
   "private": true,
   "packageManager": "pnpm@10.12.4+sha256.cadfd9e6c9fcc2cb76fe7c0779a5250b632898aea5f53d833a73690c77a778d9",
   "author": "Jordach Makaya",
-  "contributors": ["Jordach Makaya"],
+  "contributors": [
+    "Jordach Makaya"
+  ],
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -19,25 +21,35 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.2.0",
+    "@libsql/client": "^0.15.10",
     "@nuxt/eslint": "1.6.0",
     "@nuxt/icon": "1.15.0",
+    "@nuxtjs/supabase": "1.6.0",
+    "@supabase/auth-js": "^2.71.1",
+    "drizzle-orm": "^0.44.3",
     "eslint": "^9.31.0",
     "lucide-vue-next": "^0.525.0",
     "nuxt": "^3.17.7",
+    "pg": "^8.16.3",
+    "postgres": "^3.4.7",
     "vue": "^3.5.17",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.17.0",
     "@nuxtjs/tailwindcss": "^6.14.0",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
+    "@types/pg": "^8.15.4",
     "commitizen": "^4.3.1",
     "cz-git": "^1.12.0",
+    "drizzle-kit": "^0.31.4",
     "eslint-plugin-format": "^1.0.1",
     "eslint-plugin-perfectionist": "^4.15.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
+    "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   },
   "lint-staged": {

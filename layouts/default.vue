@@ -7,18 +7,12 @@ import {
 } from '@heroicons/vue/24/outline'
 
 import Footer from '~/components/app/footer.vue'
-
-type INotification = {
-  id: number
-  message: string
-  type: NotificationType
-}
-type NotificationType = 'success' | 'error' | 'warning'
+import type { AddNotificationFn, INotification, NotificationType } from '~/types/notification'
 
 const pending = ref(false)
 const notifications = ref<INotification[]>([])
 
-function addNotification(message: string, type: NotificationType = 'success') {
+const addNotification: AddNotificationFn = (message: string, type: NotificationType = 'success') => {
   const id: number = Date.now()
   notifications.value.push({ id, message, type })
 
@@ -34,7 +28,7 @@ function removeNotification(id: number) {
 provide('showLoading', (show = true) => {
   pending.value = show
 })
-provide('addNotification', addNotification)
+provide<AddNotificationFn>('addNotification', addNotification)
 </script>
 
 <template>
