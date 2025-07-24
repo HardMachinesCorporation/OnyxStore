@@ -15,6 +15,13 @@
       "when": 1753237366924,
       "tag": "0001_absent_king_bedlam",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1753330873736,
+      "tag": "0002_silky_quentin_quire",
+      "breakpoints": true
     }
   ]
 }

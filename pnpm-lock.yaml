@@ -29,9 +29,15 @@ importers:
       '@supabase/auth-js':
         specifier: ^2.71.1
         version: 2.71.1
+      dotenv:
+        specifier: ^17.2.0
+        version: 17.2.0
       drizzle-orm:
         specifier: ^0.44.3
         version: 0.44.3(@libsql/client@0.15.10)(@types/pg@8.15.4)(pg@8.16.3)(postgres@3.4.7)
+      drizzle-seed:
+        specifier: ^0.3.1
+        version: 0.3.1(drizzle-orm@0.44.3(@libsql/client@0.15.10)(@types/pg@8.15.4)(pg@8.16.3)(postgres@3.4.7))
       eslint:
         specifier: ^9.31.0
         version: 9.31.0(jiti@2.4.2)
@@ -41,6 +47,9 @@ importers:
       nuxt:
         specifier: ^3.17.7
         version: 3.17.7(@libsql/client@0.15.10)(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.1)(@types/node@24.0.15)(@vue/compiler-sfc@3.5.17)(db0@0.3.2(@libsql/client@0.15.10)(drizzle-orm@0.44.3(@libsql/client@0.15.10)(@types/pg@8.15.4)(pg@8.16.3)(postgres@3.4.7)))(drizzle-orm@0.44.3(@libsql/client@0.15.10)(@types/pg@8.15.4)(pg@8.16.3)(postgres@3.4.7))(eslint@9.31.0(jiti@2.4.2))(ioredis@5.6.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.45.1)(terser@5.43.1)(tsx@4.20.3)(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.15)(jiti@2.4.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))(yaml@2.8.0)
+      ofetch:
+        specifier: ^1.4.1
+        version: 1.4.1
       pg:
         specifier: ^8.16.3
         version: 8.16.3
@@ -2738,6 +2747,10 @@ packages:
     resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
     engines: {node: '>=12'}
 
+  dotenv@17.2.0:
+    resolution: {integrity: sha512-Q4sgBT60gzd0BB0lSyYD3xM4YxrXA9y4uBDof1JNYGzOXrQdQ6yX+7XIAqoFOGQFOTK1D3Hts5OllpxMDZFONQ==}
+    engines: {node: '>=12'}
+
   drizzle-kit@0.31.4:
     resolution: {integrity: sha512-tCPWVZWZqWVx2XUsVpJRnH9Mx0ClVOf5YUHerZ5so1OKSlqww4zy1R5ksEdGRcO3tM3zj0PYN6V48TbQCL1RfA==}
     hasBin: true
@@ -2832,6 +2845,14 @@ packages:
       sql.js:
         optional: true
       sqlite3:
+        optional: true
+
+  drizzle-seed@0.3.1:
+    resolution: {integrity: sha512-F/0lgvfOAsqlYoHM/QAGut4xXIOXoE5VoAdv2FIl7DpGYVXlAzKuJO+IphkKUFK3Dz+rFlOsQLnMNrvoQ0cx7g==}
+    peerDependencies:
+      drizzle-orm: '>=0.36.4'
+    peerDependenciesMeta:
+      drizzle-orm:
         optional: true
 
   dunder-proto@1.0.1:
@@ -5016,6 +5037,9 @@ packages:
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
+
+  pure-rand@6.1.0:
+    resolution: {integrity: sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==}
 
   qs@6.14.0:
     resolution: {integrity: sha512-YWWTjgABSKcvs/nWBi9PycY/JiPJqOD4JA6o9Sej2AtvSGarXxKC3OQSk4pAarbdQlKAh5D4FCQkJNkW+GAn3w==}
@@ -8933,6 +8957,8 @@ snapshots:
 
   dotenv@16.6.1: {}
 
+  dotenv@17.2.0: {}
+
   drizzle-kit@0.31.4:
     dependencies:
       '@drizzle-team/brocli': 0.10.2
@@ -8948,6 +8974,12 @@ snapshots:
       '@types/pg': 8.15.4
       pg: 8.16.3
       postgres: 3.4.7
+
+  drizzle-seed@0.3.1(drizzle-orm@0.44.3(@libsql/client@0.15.10)(@types/pg@8.15.4)(pg@8.16.3)(postgres@3.4.7)):
+    dependencies:
+      pure-rand: 6.1.0
+    optionalDependencies:
+      drizzle-orm: 0.44.3(@libsql/client@0.15.10)(@types/pg@8.15.4)(pg@8.16.3)(postgres@3.4.7)
 
   dunder-proto@1.0.1:
     dependencies:
@@ -11626,6 +11658,8 @@ snapshots:
       once: 1.4.0
 
   punycode@2.3.1: {}
+
+  pure-rand@6.1.0: {}
 
   qs@6.14.0:
     dependencies:

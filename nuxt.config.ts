@@ -49,6 +49,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     databaseURL: process.env.NUXT_DATABASE_URL,
     public: {
+      fakeStoreURL: process.env.NUXT_FAKE_STORE_URL,
       freeShippingThreshold: process.env.NUXT_FREE_SHIPPING_THRESHOLD,
       appEnv: process.env.NUXT_PUBLIC_APP_ENV || 'dev',
     },
