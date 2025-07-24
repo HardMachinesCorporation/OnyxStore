@@ -90,13 +90,14 @@ useHead({
           Disconnect
         </h2>
 
-        <!---If Loading -->
+        <!--- If Loading -->
+
         <div v-if="loading" class="space-y-4">
           <!--- Display Loading spinner -->
           <LoadingSpinner text="Disconnection you..." />
         </div>
 
-        <!---If Not Loading -->
+        <!--- If Not Loading -->
         <div v-else class="space-y-6">
           <div class="w-16 h-16 bg-primary-500/20 rounded-full flex items-center justify-center mx-auto">
             <CheckCircleIcon class="h-8 w-8 text-primary-400" />

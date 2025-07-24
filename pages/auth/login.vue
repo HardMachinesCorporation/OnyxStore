@@ -6,9 +6,11 @@ import {
   LockClosedIcon,
   UserIcon,
 } from '@heroicons/vue/24/outline'
+import { isAuthApiError, isAuthError } from '@supabase/auth-js'
 
 import GoogleSvg from '~/components/social/google-svg.vue'
 import LinkedinSvg from '~/components/social/linkedin-svg.vue'
+import { useAuthErrorHandler } from '~/composables/useAuthErrorHandler'
 import type { AddNotificationFn } from '~/types/notification'
 import { SignInSchema } from '~/types/user-schema'
 import type { SignInDto } from '~/types/user-schema'
@@ -20,27 +22,29 @@ const form = reactive<SignInDto & { remember: boolean }>({
   remember: false,
 })
 
-const errors = ref<Partial<Record<keyof SignInDto, string>>>({})
+const loginErrors = ref<Partial<Record<keyof SignInDto, string>>>({})
 const loading = ref(false)
 const showPassword = ref(false)
 
 // validation
 function validateForm() {
   const resultValidation = SignInSchema.safeParse(form)
-  errors.value = {}
+  loginErrors.value = {}
   if (!resultValidation.success) {
     for (const issue of resultValidation.error?.issues) {
       const path = issue.path[0] as keyof SignInDto
-      errors.value[path] = issue.message
+      loginErrors.value[path] = issue.message
     }
     return false
   }
   // reset errors if validation is successful
-  errors.value = {}
+  loginErrors.value = {}
   return resultValidation.success
 }
 
 const addNotification = inject<AddNotificationFn>('addNotification') as AddNotificationFn
+
+const { handleRegistrationError } = useAuthErrorHandler()
 
 async function handleLogin() {
   if (!validateForm())
@@ -50,58 +54,84 @@ async function handleLogin() {
 
   try {
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    const { data, error } = await useSupabaseClient().auth.signInWithPassword({
+      email: form.email,
+      password: form.password,
+    })
+
+    loading.value = false
+
+    if (error) {
+      throw error
+    }
+
+    if (!data.session) {
+      addNotification('Something wrong happened! Please try again later', 'error')
+      return
+    }
 
     addNotification('Login successful! Welcome. ', 'success')
-
-    // Mock successful login
-
-    // Redirect to home or dashboard
+    setTimeout(() => navigateTo('/'), 2000)
   }
   catch (error) {
-    // TODO debug only
-    console.error(error)
-    addNotification('something went wrong, please try again later', 'error')
+    if (isAuthApiError(error)) {
+      handleRegistrationError(error)
+    }
+    else if (isAuthError(error)) {
+      addNotification('Something went wrong, please try again later', 'error')
+    }
+    else {
+      addNotification('Network error, please try again later.', 'error')
+    }
   }
+  finally {
+    loading.value = false
+  }
+
+  definePageMeta({
+    layout: 'default',
+    title: 'Sign In',
+  })
+
+  useHead({
+    title: 'Sign In – Professional E-commerce for High-Quality Products',
+    meta: [
+      {
+        name: 'description',
+        content: 'Discover Premium Store, your destination for top-quality products. Shop electronics, fashion, home essentials, and more with secure checkout and fast delivery.',
+      },
+      {
+        name: 'keywords',
+        content: 'premium, e-commerce, online store, high quality, electronics, fashion, home, secure payment, fast shipping, best deals, nuxt, vuejs',
+      },
+      // Built with Nuxt - meta custom
+      {
+        name: 'generator',
+        content: 'Nuxt',
+      },
+      // Open Graph / Twitter / Canonical (comme précédemment)
+      { property: 'og:title', content: 'Premium Store – Professional E-commerce for High-Quality Products' },
+      {
+        property: 'og:description',
+        content: 'Discover Premium Store: Electronics, fashion, and essentials with secure payment and express delivery.',
+      },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: 'https://onyx-store.vercel.app//' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Premium Store – Professional E-commerce for High-Quality Products' },
+      {
+        name: 'twitter:description',
+        content: 'Discover Premium Store: Electronics, fashion, and essentials with secure payment and express delivery.',
+      },
+
+      // Custom meta for framework (utilisé parfois par des outils SEO/dev)
+      { name: 'framework', content: 'Nuxt 3' },
+    ],
+    link: [
+      { rel: 'canonical', href: 'https://onyx-store.vercel.app/' },
+    ],
+  })
 }
-
-definePageMeta({
-  layout: 'default',
-  title: 'Sign In',
-})
-
-useHead({
-  title: 'Sign In – Professional E-commerce for High-Quality Products',
-  meta: [
-    {
-      name: 'description',
-      content: 'Discover Premium Store, your destination for top-quality products. Shop electronics, fashion, home essentials, and more with secure checkout and fast delivery.',
-    },
-    {
-      name: 'keywords',
-      content: 'premium, e-commerce, online store, high quality, electronics, fashion, home, secure payment, fast shipping, best deals, nuxt, vuejs',
-    },
-    // Built with Nuxt - meta custom
-    {
-      name: 'generator',
-      content: 'Nuxt',
-    },
-    // Open Graph / Twitter / Canonical (comme précédemment)
-    { property: 'og:title', content: 'Premium Store – Professional E-commerce for High-Quality Products' },
-    { property: 'og:description', content: 'Discover Premium Store: Electronics, fashion, and essentials with secure payment and express delivery.' },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://onyx-store.vercel.app//' },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: 'Premium Store – Professional E-commerce for High-Quality Products' },
-    { name: 'twitter:description', content: 'Discover Premium Store: Electronics, fashion, and essentials with secure payment and express delivery.' },
-
-    // Custom meta for framework (utilisé parfois par des outils SEO/dev)
-    { name: 'framework', content: 'Nuxt 3' },
-  ],
-  link: [
-    { rel: 'canonical', href: 'https://onyx-store.vercel.app/' },
-  ],
-})
 </script>
 
 <template>
@@ -132,13 +162,13 @@ useHead({
                 id="email" v-model="form.email"
                 required
                 class="input pl-10"
-                :class="{ 'border-red-500': errors.email }"
+                :class="{ 'border-red-500': loginErrors.email }"
                 placeholder="your@email.com"
               >
               <EnvelopeIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
             </div>
-            <p v-if="errors.email" class="mt-1 text-sm text-red-400">
-              {{ errors.email }}
+            <p v-if="loginErrors.email" class="mt-1 text-sm text-red-400">
+              {{ loginErrors.email }}
             </p>
           </div>
 
@@ -152,7 +182,7 @@ useHead({
                 :type="showPassword ? 'text' : 'password' "
                 required
                 class="input pl-10 pr-10"
-                :class="{ 'border-red-500': errors.password }"
+                :class="{ 'border-red-500': loginErrors.password }"
                 placeholder="your password"
               >
               <LockClosedIcon class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -165,8 +195,8 @@ useHead({
                 <EyeSlashIcon v-else class="h-5 w-5" />
               </button>
             </div>
-            <p v-if="errors.password" class="mt-1 text-sm text-red-400">
-              {{ errors.password }}
+            <p v-if="loginErrors.password" class="mt-1 text-sm text-red-400">
+              {{ loginErrors.password }}
             </p>
           </div>
         </div>

@@ -6,7 +6,7 @@ import {
   LockClosedIcon,
   UserPlusIcon,
 } from '@heroicons/vue/24/outline'
-import { AuthError } from '@supabase/auth-js'
+import { isAuthApiError, isAuthError } from '@supabase/auth-js'
 
 import { useAppEn } from '~/composables/useAppEn'
 import { useAuthErrorHandler } from '~/composables/useAuthErrorHandler'
@@ -112,34 +112,40 @@ async function handleRegister() {
 
     })
 
+    if (error) {
+      throw error
+    }
+
+    // Success -> clear all
+    registrationErrors.value = {}
+    loading.value = false
+    addNotification('Welcome ! Please check your email to activate your account', 'success')
+    navigateTo(urlRedirection, { external: isProd })
+  }
+  catch (error) {
     /**
      * An Error might be not of type AuthError
      * handleAuthError require an instance of AuthError
      */
-    if (error instanceof AuthError) {
+    if (isAuthApiError(error)) {
       handleRegistrationError(error)
       loading.value = false
       return
     }
-    else if (error) {
+    else if (isAuthError(error)) {
       // An error other than an instance of AuthError
       addNotification('Something went wrong, please try again later', 'error')
       loading.value = false
       return
     }
-  }
-  catch (error: unknown) {
-    addNotification('Network error, please try again later.', 'error')
+    else {
+      addNotification('Network error, please try again later.', 'error')
+      return
+    }
   }
   finally {
     loading.value = false
   }
-
-  // Success -> clear all
-  registrationErrors.value = {}
-  loading.value = false
-  addNotification('Welcome ! Please check your email to activate your account', 'success')
-  navigateTo(urlRedirection, { external: isProd })
 }
 
 useHead({
