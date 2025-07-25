@@ -59,5 +59,8 @@ export default defineNuxtConfig({
     key: process.env.NUXT_SUPABASE_KEY,
     redirect: false,
   },
+  imports: {
+    dirs: ['lib/business'], // pour auto‑importer applyDiscountCents, formatCents, etc.
+  },
 
 })

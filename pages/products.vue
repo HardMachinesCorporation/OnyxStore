@@ -1,3 +1,5 @@
 <template>
-  <h2>Product page</h2>
+  <div class="flex flex-col  justify-center mx-auto max-w-md min-h-screen">
+    <ProductCard />
+  </div>
 </template>

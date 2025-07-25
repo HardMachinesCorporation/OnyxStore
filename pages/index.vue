@@ -1,12 +1,37 @@
 <script setup lang="ts">
 import { ChatBubbleLeftRightIcon, ShieldCheckIcon, TruckIcon } from '@heroicons/vue/24/outline'
 
+import { useFormat } from '~/lib/business/useFormat'
+import type { ProductProps } from '~/lib/types/products/product'
+
 const config = useRuntimeConfig()
 const freeShippingThreshold = Number(config.public.freeShippingThreshold)
+
+const featuredProducts = ref<ProductProps[]>([])
+const { formatCents } = useFormat()
 
 if (import.meta.client) {
   document.head.insertAdjacentHTML('afterbegin', '<!-- Built by Jordach MAKAYA with Nuxt 3 🚀 -->')
 }
+
+const { data: products, execute, error } = await useFetch<ProductProps[] | null>('/api/products/featured')
+
+onMounted(async () => {
+  await execute()
+})
+
+watch(
+  () => products.value,
+  (newProduct) => {
+    if (newProduct) {
+      featuredProducts.value = newProduct.map(product => ({
+        ...product,
+        discountedPrice: Number(formatCents(BigInt(product.discountedPrice))),
+      }))
+    }
+  },
+  { immediate: true },
+)
 
 useHead({
   title: 'Premium Store – Professional E-commerce for High-Quality Products',
@@ -82,6 +107,18 @@ useHead({
         <!-- Products Div wrapper -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           <!-- TODO Products Component goes here -->
+          <ProductCard
+            v-for="product in featuredProducts"
+            :id="product.id"
+            :key="product.id"
+            :description="product.description"
+            :discounted-price="product.discountedPrice"
+            :image="product.image"
+            :on-sale="product.onSale"
+            :rating="product.rating"
+            :original-price="product.originalPrice"
+            :title="product.title"
+          />
         </div>
 
         <div class="text-center mt-12">

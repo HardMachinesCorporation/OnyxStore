@@ -3,7 +3,7 @@ import { integer, pgTable, serial, varchar } from 'drizzle-orm/pg-core'
 
 export const ProductsTable = pgTable('products', {
   id: serial().primaryKey(),
-  title: varchar('title', { length: 255 }),
+  title: varchar('title', { length: 255 }).notNull(),
   price: integer('price').notNull(),
   description: varchar('description'),
   category: varchar('category'),
@@ -11,7 +11,7 @@ export const ProductsTable = pgTable('products', {
   model: varchar('model'),
   color: varchar('color'),
   discount: integer('discount'),
-  image: varchar('image'),
+  image: varchar('image').notNull(),
 })
 
 export type Product = InferSelectModel<typeof ProductsTable>

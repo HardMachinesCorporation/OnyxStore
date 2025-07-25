@@ -16,7 +16,7 @@ const db = drizzle({
 })
 
 async function main() {
-  const fakeApiURL = process.env.NUXT_FAKE_STORE_URL
+  const fakeApiURL = process.env.NUXT_FAKE_STORE_URL as string
   const data = await $fetch<ApiResponse>(
     fakeApiURL,
   )
