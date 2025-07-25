@@ -1,18 +1,36 @@
-import type { InferInsertModel, InferSelectModel } from 'drizzle-orm'
-import { integer, pgTable, serial, varchar } from 'drizzle-orm/pg-core'
+import { integer, pgTable, varchar } from 'drizzle-orm/pg-core'
+import { createSelectSchema } from 'drizzle-zod'
+import postgres from 'postgres'
+import type { z } from 'zod'
 
+// 📦 Table Drizzle
 export const ProductsTable = pgTable('products', {
-  id: serial().primaryKey(),
+  id: integer().primaryKey().generatedByDefaultAsIdentity(),
   title: varchar('title', { length: 255 }).notNull(),
+  image: varchar('image').notNull(),
   price: integer('price').notNull(),
-  description: varchar('description'),
-  category: varchar('category'),
+  description: varchar('description').notNull(),
   brand: varchar('brand'),
   model: varchar('model'),
   color: varchar('color'),
+  category: varchar('category'),
   discount: integer('discount'),
-  image: varchar('image').notNull(),
+
 })
 
-export type Product = InferSelectModel<typeof ProductsTable>
-export type ProductDto = InferInsertModel<typeof ProductsTable>
+// ✅ DTO TypeScript
+const _ProductSchema = createSelectSchema(ProductsTable)
+export type ProductDto = z.infer<typeof _ProductSchema>
+// ❌ À éviter dans une app à fort trafic
+const sql = postgres(process.env.DATABASE_URL!)
+
+export type FeaturedProduct = {
+  id?: number
+  title: string
+  description: string
+  price: number
+  originalPrice: number
+  rating: number
+  onSale: boolean
+  image: string
+}

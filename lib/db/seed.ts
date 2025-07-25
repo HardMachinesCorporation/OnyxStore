@@ -16,6 +16,11 @@ const db = drizzle({
 })
 
 async function main() {
+  // prisma/seed.ts
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('⛔ Cannot run seed in production')
+  }
+
   const fakeApiURL = process.env.NUXT_FAKE_STORE_URL as string
   const data = await $fetch<ApiResponse>(
     fakeApiURL,
@@ -43,7 +48,7 @@ async function main() {
         .values(dto)
     }
   })
-  console.log(`✅ Seed terminé : ${dtos.length} produits insérés.`)
+  console.log('✅ Done!. sucessfully seeded the database.')
   process.exit(0)
 }
 

@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1753235212411,
-      "tag": "0000_known_iron_monger",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1753237366924,
-      "tag": "0001_absent_king_bedlam",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1753330873736,
-      "tag": "0002_silky_quentin_quire",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1753418871045,
-      "tag": "0003_fat_santa_claus",
+      "when": 1753480463220,
+      "tag": "0000_sour_purifiers",
       "breakpoints": true
     }
   ]

@@ -2,36 +2,44 @@
 import { ChatBubbleLeftRightIcon, ShieldCheckIcon, TruckIcon } from '@heroicons/vue/24/outline'
 
 import { useFormat } from '~/lib/business/useFormat'
-import type { ProductProps } from '~/lib/types/products/product'
+import type { FeaturedProduct } from '~/lib/db/schema'
+import type { AddNotificationFn } from '~/types/notification'
 
+const addNotification = inject<AddNotificationFn>('addNotification') as AddNotificationFn
 const config = useRuntimeConfig()
 const freeShippingThreshold = Number(config.public.freeShippingThreshold)
 
-const featuredProducts = ref<ProductProps[]>([])
+const featuredProducts = ref<FeaturedProduct[]>([])
 const { formatCents } = useFormat()
 
 if (import.meta.client) {
   document.head.insertAdjacentHTML('afterbegin', '<!-- Built by Jordach MAKAYA with Nuxt 3 🚀 -->')
 }
 
-const { data: products, execute, error } = await useFetch<ProductProps[] | null>('/api/products/featured')
+const { data: products, execute, error } = await useFetch<FeaturedProduct[] | null>('/api/products/featured', {
+  onResponseError({ response }) {
+    const err = response._data as { publicMessage?: string }
+    const message = err.publicMessage || 'Something went wrong'
+    addNotification(message, 'error')
+  },
+})
 
 onMounted(async () => {
   await execute()
+  if (error.value) {
+    const msg
+        = (error.value.data as { publicMessage?: string })?.publicMessage || error.value.message
+    addNotification(msg, 'error')
+  }
 })
 
-watch(
-  () => products.value,
-  (newProduct) => {
-    if (newProduct) {
-      featuredProducts.value = newProduct.map(product => ({
-        ...product,
-        discountedPrice: Number(formatCents(BigInt(product.discountedPrice))),
-      }))
-    }
-  },
-  { immediate: true },
-)
+watch(() => products.value, (newValue) => {
+  if (newValue) {
+    featuredProducts.value = newValue
+  }
+}, {
+  immediate: true,
+})
 
 useHead({
   title: 'Premium Store – Professional E-commerce for High-Quality Products',
@@ -109,15 +117,8 @@ useHead({
           <!-- TODO Products Component goes here -->
           <ProductCard
             v-for="product in featuredProducts"
-            :id="product.id"
             :key="product.id"
-            :description="product.description"
-            :discounted-price="product.discountedPrice"
-            :image="product.image"
-            :on-sale="product.onSale"
-            :rating="product.rating"
-            :original-price="product.originalPrice"
-            :title="product.title"
+            :product="product"
           />
         </div>
 
