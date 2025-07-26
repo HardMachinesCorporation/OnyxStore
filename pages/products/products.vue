@@ -4,6 +4,7 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 
 import LoadingSpinner from '~/components/app/loadingSpinner.vue'
 import type { ProductType } from '~/lib/types/products/product'
+import type { Paginated } from '~/lib/types/response/api/pagination'
 import type { AddNotificationFn } from '~/types/notification'
 
 const addNotification = inject<AddNotificationFn>('addNotification') as AddNotificationFn
@@ -13,13 +14,16 @@ const selectedCategory = ref('')
 const sortBy = ref('name')
 const currentPage = ref(1)
 const categoryOptions = ref<string[]>([])
+
+const pageSize = ref(54)
+const page = ref(1)
 // Computed properties
 const filteredProducts = computed(() => {
-  let filtered = productListState.value
+  let list = productListState.value
   if (searchQuery.value) {
     // Try to find match in name or description
     const query = searchQuery.value.toLowerCase()
-    filtered = filtered.filter(product =>
+    list = list.filter(product =>
       product.title.toLowerCase().includes(query)
       ?? product.description.toLowerCase().includes(query),
     )
@@ -27,11 +31,11 @@ const filteredProducts = computed(() => {
 
   // Filter by category
   if (selectedCategory.value) {
-    filtered = filtered.filter(product => product.category === selectedCategory.value)
+    list = list.filter(product => product.category === selectedCategory.value)
   }
 
   // sort product
-  filtered.sort((a, b) => {
+  list.sort((a, b) => {
     switch (sortBy.value) {
       case 'price':
         return a.price - b.price
@@ -43,17 +47,19 @@ const filteredProducts = computed(() => {
         return a.title.localeCompare(b.title)
     }
   })
-  return filtered
+  return list
 })
 
 const totalPages = computed(() => Math.ceil(filteredProducts.value.length / 12))
-const { execute, pending: isLoading, data: paginatedProducts } = await useFetch<{ data: ProductType[], categories: string[] }>('/api/products/with-category', {
-  onResponseError({ response }) {
-    const err = response._data as { publicMessage?: string }
-    const message = err.publicMessage || 'Something went wrong'
-    addNotification(message, 'error')
-  },
-})
+const { execute, pending: isLoading, data: paginatedProducts }
+    = await useFetch<{ paginatedData: Paginated<ProductType>, categories: string[] }>('/api/products/with-category', {
+      params: { page: page.value, pageSize: pageSize.value },
+      onResponseError({ response }) {
+        const err = response._data as { publicMessage?: string }
+        const message = err.publicMessage || 'Something went wrong'
+        addNotification(message, 'error')
+      },
+    })
 
 onMounted(async () => {
   await execute()
@@ -66,10 +72,11 @@ watch(
   () => paginatedProducts.value,
   (newData) => {
     if (newData) {
-      productListState.value = newData.data
+      productListState.value = newData.paginatedData.data
       if (newData.categories && newData.categories.length !== categoryOptions.value.length) {
         categoryOptions.value = newData.categories
         addNotification(` ${newData.categories.length} categories added`, 'success')
+        addNotification(` ${newData.paginatedData.total} Products received`, 'warning')
       }
     }
   },
