@@ -2,21 +2,21 @@
 import { ChatBubbleLeftRightIcon, ShieldCheckIcon, TruckIcon } from '@heroicons/vue/24/outline'
 
 import { useFormat } from '~/lib/business/useFormat'
-import type { FeaturedProduct } from '~/lib/db/schema'
+import type { ProductType } from '~/lib/db/schema'
 import type { AddNotificationFn } from '~/types/notification'
 
 const addNotification = inject<AddNotificationFn>('addNotification') as AddNotificationFn
 const config = useRuntimeConfig()
 const freeShippingThreshold = Number(config.public.freeShippingThreshold)
 
-const featuredProducts = ref<FeaturedProduct[]>([])
+const featuredProducts = ref<ProductType[]>([])
 const { formatCents } = useFormat()
 
 if (import.meta.client) {
   document.head.insertAdjacentHTML('afterbegin', '<!-- Built by Jordach MAKAYA with Nuxt 3 🚀 -->')
 }
 
-const { data: products, execute, error } = await useFetch<FeaturedProduct[] | null>('/api/products/featured', {
+const { data: products, execute, error } = await useFetch<ProductType[] | null>('/api/products/featured', {
   onResponseError({ response }) {
     const err = response._data as { publicMessage?: string }
     const message = err.publicMessage || 'Something went wrong'
@@ -90,7 +90,7 @@ useHead({
           Discover our exclusive selection of premium products, carefully chosen to offer you excellence
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style="animation-delay: 0.4s">
-          <NuxtLink to="/products" class="btn-primary text-lg px-8 py-4">
+          <NuxtLink to="/products/products" class="btn-primary text-lg px-8 py-4">
             Discover our products
           </NuxtLink>
           <button class="btn-secondary text-lg px-8 py-4">
@@ -123,7 +123,7 @@ useHead({
         </div>
 
         <div class="text-center mt-12">
-          <NuxtLink to="/products" class="btn-primary text-lg px-8 py-4">
+          <NuxtLink to="/products/products" class="btn-primary text-lg px-8 py-4">
             View all products
           </NuxtLink>
         </div>

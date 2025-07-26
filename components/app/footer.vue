@@ -47,7 +47,7 @@ const currentYear = new Date().getFullYear()
           </h3>
           <ul class="space-y-3">
             <li>
-              <NuxtLink to="/products" class="footer-quick-links">
+              <NuxtLink to="/products/products" class="footer-quick-links">
                 Products
               </NuxtLink>
             </li>

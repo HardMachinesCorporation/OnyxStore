@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { HeartIcon, StarIcon } from '@heroicons/vue/24/outline'
 
-import type { FeaturedProduct } from '~/lib/db/schema'
+import type { ProductType } from '~/lib/db/schema'
 
-defineProps<{ product: FeaturedProduct }>()
+defineProps<{ product: ProductType }>()
 </script>
 
 <template>

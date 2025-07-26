@@ -1,25 +1,11 @@
-export type ProductProps = {
-  id: number
-  brand: string
-  price: number
-  image: string
+export type ProductType = {
+  id?: number
+  title: string
   description: string
-  rating?: number
-  category: string
-  productType: string
-  productColor?: { hex: string, colorNme: string }
-  oldPrice?: number
+  price: number
+  originalPrice?: number
+  rating: number
   onSale?: boolean
-
+  image: string
+  category?: string | null
 }
-/**
- * /**
- *
- *  "product_colors": [
- *       {
- *         "hex_value": "#B28378",
- *         "colour_name": "BFF Pencil"
- *       },
- *
- * **
- */

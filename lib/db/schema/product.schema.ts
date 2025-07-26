@@ -22,15 +22,4 @@ export const ProductsTable = pgTable('products', {
 const _ProductSchema = createSelectSchema(ProductsTable)
 export type ProductDto = z.infer<typeof _ProductSchema>
 // ❌ À éviter dans une app à fort trafic
-const sql = postgres(process.env.DATABASE_URL!)
-
-export type FeaturedProduct = {
-  id?: number
-  title: string
-  description: string
-  price: number
-  originalPrice: number
-  rating: number
-  onSale: boolean
-  image: string
-}
+export const sql = postgres(process.env.DATABASE_URL!)

@@ -62,7 +62,7 @@ onMounted(() => {
         <!-- Navigation -->
         <nav class="hidden md:flex space-x-8">
           <NuxtLink
-            to="/products"
+            to="/products/products"
             class="navigation-link"
           >
             Products
@@ -154,7 +154,7 @@ onMounted(() => {
       <!-- Mobile Navigation -->
       <transition name="slide">
         <div v-show="showMobileMenu" class="md:hidden border-t border-dark-800 py-4 space-y-2 ">
-          <NuxtLink to="/products" class="block text-gray-300 hover:text-primary-400 px-3 py-2 text-base font-medium transition-colors duration-200">
+          <NuxtLink to="/products/products" class="block text-gray-300 hover:text-primary-400 px-3 py-2 text-base font-medium transition-colors duration-200">
             Products
           </NuxtLink>
           <NuxtLink

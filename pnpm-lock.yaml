@@ -35,6 +35,9 @@ importers:
       drizzle-orm:
         specifier: ^0.44.3
         version: 0.44.3(@libsql/client@0.15.10)(@types/pg@8.15.4)(pg@8.16.3)(postgres@3.4.7)
+      drizzle-pagination:
+        specifier: ^1.0.12
+        version: 1.0.12(drizzle-orm@0.44.3(@libsql/client@0.15.10)(@types/pg@8.15.4)(pg@8.16.3)(postgres@3.4.7))
       drizzle-seed:
         specifier: ^0.3.1
         version: 0.3.1(drizzle-orm@0.44.3(@libsql/client@0.15.10)(@types/pg@8.15.4)(pg@8.16.3)(postgres@3.4.7))
@@ -2849,6 +2852,11 @@ packages:
         optional: true
       sqlite3:
         optional: true
+
+  drizzle-pagination@1.0.12:
+    resolution: {integrity: sha512-t+SW+FNUhsx8jGuSwtEvcUrDhwYYQpcp0eCyMVl1F/z0LJ2E/yNZekUO6UeGMRGi0GQAYjn/YxHFbrLh9+3zGg==}
+    peerDependencies:
+      drizzle-orm: '>=0.27.2 <1.0.0'
 
   drizzle-seed@0.3.1:
     resolution: {integrity: sha512-F/0lgvfOAsqlYoHM/QAGut4xXIOXoE5VoAdv2FIl7DpGYVXlAzKuJO+IphkKUFK3Dz+rFlOsQLnMNrvoQ0cx7g==}
@@ -8983,6 +8991,10 @@ snapshots:
       '@types/pg': 8.15.4
       pg: 8.16.3
       postgres: 3.4.7
+
+  drizzle-pagination@1.0.12(drizzle-orm@0.44.3(@libsql/client@0.15.10)(@types/pg@8.15.4)(pg@8.16.3)(postgres@3.4.7)):
+    dependencies:
+      drizzle-orm: 0.44.3(@libsql/client@0.15.10)(@types/pg@8.15.4)(pg@8.16.3)(postgres@3.4.7)
 
   drizzle-seed@0.3.1(drizzle-orm@0.44.3(@libsql/client@0.15.10)(@types/pg@8.15.4)(pg@8.16.3)(postgres@3.4.7)):
     dependencies:

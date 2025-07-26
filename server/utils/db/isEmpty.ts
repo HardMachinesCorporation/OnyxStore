@@ -1,3 +1,5 @@
+import type { H3Event } from 'h3'
+
 import { sql } from '~/lib/db'
 
 export async function doesTableExist(tableName: string): Promise<boolean> {
@@ -17,4 +19,17 @@ export async function doesTableExist(tableName: string): Promise<boolean> {
     `
 
   return result[0]?.exists ?? false
+}
+
+export async function passThisEventIfDatabaseReady(event: H3Event) {
+  if (!await doesTableExist('products')) {
+    const publicMessage = 'Database is empty. Table "products" does not exist. Please seed the database.'
+    console.error(publicMessage)
+    return sendError(event, createError({
+      statusCode: 500,
+      statusMessage: 'the Database is empty',
+      data: publicMessage,
+      fatal: true, // Marque cette erreur comme critique
+    }))
+  }
 }

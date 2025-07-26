@@ -198,7 +198,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## 📚 Documentation
+## 📚 Codes documentation
 
 [![Documented on GitBook](https://img.shields.io/static/v1?message=Documented%20on%20GitBook&logo=gitbook&logoColor=ffffff&label=&labelColor=5c5c5c&color=3F89A1)](https://jordachlab.gitbook.io/onyxstore/)
 
